@@ -65,9 +65,19 @@ yes 0000 | systemctl start xrdp
 #=========================
 yes | sudo apt-get install net-tools
 
-#install vscode
+#PART 4: install vscode
+#======================
 
-#...
+#PART 4.1 OPTION A: install vscode using microsoft gpg key
+sudo apt-get install wget gpg
+wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+rm -f packages.microsoft.gpg
+
+#PART 4.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
+#sudo apt install snapd - install snapd first, if not yet installed
+#sudo snap install --classic code # or code-insiders
 
 #PART END: delete this file from login folder and reboot
 #=======================================================
