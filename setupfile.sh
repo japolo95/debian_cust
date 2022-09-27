@@ -69,15 +69,29 @@ yes | sudo apt-get install net-tools
 #======================
 
 #PART 4.1 OPTION A: install vscode using microsoft gpg key
+#PART 4.1.A.1 install gpg keys and add necessary sources
 sudo apt-get install wget gpg
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
-sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
-rm -f packages.microsoft.gpg
+yes | sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+yes | sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+sudo rm -f packages.microsoft.gpg
+
+#PART 4.1.A.2 install vscode
+sudo apt install apt-transport-https
+sudo apt update
+sudo apt install code # or code-insiders
+
+#create desktop link
+ln -s /usr/share/code/code /home/user/Desktop/code
 
 #PART 4.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
 #sudo apt install snapd - install snapd first, if not yet installed
 #sudo snap install --classic code # or code-insiders
+
+#PART 5: visual settings customization
+#=====================================
+#set font scaling factor from 1.0 to 1.1
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 
 #PART END: delete this file from login folder and reboot
 #=======================================================
