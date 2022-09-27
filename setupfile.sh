@@ -17,7 +17,7 @@ echo "reloading bash profile"
 
 #PART 0.2: rename computer:
 echo "renaming computer"
-su -c "echo 'workmachine' > /etc/hostname" #sudo would not work, the arrow symbol has privilegies of current shell, not sudo
+yes 0000 | su -c "echo 'workmachine' > /etc/hostname" #sudo would not work, the arrow symbol has privilegies of current shell, not sudo
 
 #PART 1: remove cd from resrouces and add resources for apps installation
 #========================================================================
