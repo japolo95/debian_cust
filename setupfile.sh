@@ -69,6 +69,7 @@ yes | sudo apt-get install net-tools
 
 #...
 
-#PART END: reboot
-#================
+#PART END: delete this file from login folder and reboot
+#=======================================================
+sudo rm /etc/init.d/setupfile.sh
 sudo reboot
