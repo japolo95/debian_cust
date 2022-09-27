@@ -2,18 +2,22 @@
 
 #PART 0: set current user to be superuser and add him to sudoers
 #su root -c "/sbin/usermod -aG sudo user" #not working
+echo "adding user to sudoers"
 su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
 #PART 0.1: add sbin paths to environment
+echo "creating sbin paths"
 sudo echo -e "\nexport PATH=$PATH:/sbin" >> /home/user/.bash_profile #alternatively ~/.bash_profile
 sudo echo -e "\nexport PATH=$PATH:/sbin" >> /home/user/.bashrc #alternatively ~/.bashrc
 
 #reload bash profile
-. ~/.bash_profile
-. ~/.bashrc
+echo "reloading bash profile"
+. /home/user/.bash_profile
+. /home/user/.bashrc
 
 #PART 0.2: rename computer:
-su -c "echo 'workmachine' > /etc/hostname"
+echo "renaming computer"
+sudo "echo 'workmachine' > /etc/hostname"
 
 #PART 1: remove cd from resrouces and add resources for apps installation
 #========================================================================
