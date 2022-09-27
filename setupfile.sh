@@ -31,14 +31,18 @@ echo "Installing software" #in interactive shell you need to use echo -e
 #update apt
 sudo apt update
 
-#PART 2: install RDP
+#PART 2: install gnome
+#=====================
+sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y
+
+#PART 3: install RDP
 #=======================================================
 
-#PART 2.1 OPTION A: install xrdp using apt-get
+#PART 3.1 OPTION A: install xrdp using apt-get
 #don't use this for debian bullseye (11), as it does not work with gnome
 yes | sudo apt-get install xrdp
 
-#PART 2.1 OPTION B: install xrdp manually
+#PART 3.1 OPTION B: install xrdp manually
 #an alternative way, custom version compiled
 #Following packages are necessary for xrdp compilation
 #install compiler (will be used for installation of new version of xrdp)
@@ -57,26 +61,26 @@ yes | sudo apt-get install xrdp
 #install
 #cd ..
 
-#PART 2.2 - RUN xrdp
+#PART 3.2 - RUN xrdp
 yes 0000 | sudo systemctl enable --now xrdp
 yes 0000 | systemctl start xrdp
 
-#PART 3: install net-tools
+#PART 4: install net-tools
 #=========================
 yes | sudo apt-get install net-tools
 
-#PART 4: install vscode
+#PART 5: install vscode
 #======================
 
-#PART 4.1 OPTION A: install vscode using microsoft gpg key
-#PART 4.1.A.1 install gpg keys and add necessary sources
+#PART 5.1 OPTION A: install vscode using microsoft gpg key
+#PART 5.1.A.1 install gpg keys and add necessary sources
 sudo apt-get install wget gpg
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 yes | sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 yes | sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo rm -f packages.microsoft.gpg
 
-#PART 4.1.A.2 install vscode
+#PART 5.1.A.2 install vscode
 sudo apt install apt-transport-https
 sudo apt update
 sudo apt install code # or code-insiders
@@ -84,11 +88,11 @@ sudo apt install code # or code-insiders
 #create desktop link
 ln -s /usr/share/code/code /home/user/Desktop/code
 
-#PART 4.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
+#PART 5.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
 #sudo apt install snapd - install snapd first, if not yet installed
 #sudo snap install --classic code # or code-insiders
 
-#PART 5: visual settings customization
+#PART 6: visual settings customization
 #=====================================
 #set font scaling factor from 1.0 to 1.1
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
