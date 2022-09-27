@@ -3,7 +3,7 @@
 #PART 0: set current user to be superuser and add him to sudoers
 #su root -c "/sbin/usermod -aG sudo user" #not working
 echo "adding user to sudoers"
-su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
+yes 0000 | su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
 #PART 0.1: add sbin paths to environment
 echo "creating sbin paths"
@@ -36,7 +36,7 @@ sudo apt update
 
 #PART 2.1 OPTION A: install xrdp using apt-get
 #don't use this for debian bullseye (11), as it does not work with gnome
-sudo apt-get install xrdp
+yes | sudo apt-get install xrdp
 
 #PART 2.1 OPTION B: install xrdp manually
 #an alternative way, custom version compiled
@@ -58,12 +58,12 @@ sudo apt-get install xrdp
 #cd ..
 
 #PART 2.2 - RUN xrdp
-sudo systemctl enable --now xrdp
-systemctl start xrdp
+yes 0000 | sudo systemctl enable --now xrdp
+yes 0000 | systemctl start xrdp
 
 #PART 3: install net-tools
 #=========================
-sudo apt-get install net-tools
+yes | sudo apt-get install net-tools
 
 #install vscode
 
