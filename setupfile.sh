@@ -71,4 +71,4 @@ sudo apt-get install net-tools
 
 #PART END: reboot
 #================
-sudo reboot
+#sudo reboot
