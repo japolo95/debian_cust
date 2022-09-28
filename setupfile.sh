@@ -113,9 +113,9 @@ echo "press Enter to install vscode"
 read x
 
 #PART 5.1.A.2 install vscode
-sudo apt install apt-transport-https
+yes y | sudo apt install apt-transport-https
 sudo apt update
-sudo apt install code # or code-insiders
+yes y | sudo apt install code # or code-insiders
 
 #PART 5.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
 #sudo apt install snapd - install snapd first, if not yet installed
