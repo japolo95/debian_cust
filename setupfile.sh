@@ -28,6 +28,7 @@ yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bullseye main\ndeb
 
 #update apt so that updated file /etc/apt/sources.list takes effect for apt (i.e. apt must reload sources.list file)
 sudo apt update
+sudo apt-get update
 
 echo "Installing software" #in interactive shell you need to use echo -e
 
