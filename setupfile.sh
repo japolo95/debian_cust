@@ -7,8 +7,8 @@ yes 0000 | su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
 #PART 0.1: add sbin paths to environment
 echo "creating sbin paths"
-sudo echo -e "\nexport PATH=$PATH:/sbin" >> /home/user/.bash_profile #alternatively ~/.bash_profile
-sudo echo -e "\nexport PATH=$PATH:/sbin" >> /home/user/.bashrc #alternatively ~/.bashrc
+su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bash_profile #alternatively ~/.bash_profile"
+su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bashrc #alternatively ~/.bashrc"
 
 #reload bash profile
 echo "reloading bash profile"
@@ -35,7 +35,7 @@ echo "Installing software" #in interactive shell you need to use echo -e
 #PART 2: install gnome (disabled now)
 #=====================
 #sudo apt-get purge gnome-2048 aisleriot cheese gnome-chess gnome-contacts simple-scan evolution five-or-more four-in-a-row yelp hitori gnome-klotski libreoffice-common libreoffice-calc libreoffice-draw libreoffice-impress libreoffice-writer lightsoff gnome-mahjongg gnome-maps gnome-mines gnome-music gnome-nibbles malcontent seahorse quadrapassel iagno rhythmbox gnome-robots shotwell gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex transmission-gtk totem gnome-weather -y
-#sudo apt-get purge gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y
+sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y --ignore-missing
 
 #PART 3: install RDP
 #=======================================================
