@@ -30,9 +30,15 @@ echo "reloading bash profile"
 echo "press Enter to rename computer"
 read x
 
-#PART BASIC SETUP.2: rename computer:
+#PART BASIC SETUP.3: rename computer:
 echo "renaming computer"
 yes 0000 | su -c "echo 'workmachine' > /etc/hostname" #sudo would not work, the arrow symbol has privilegies of current shell, not sudo
+
+echo "press Enter to disable interactive prompts"
+read x
+
+#PART BASIC SETUP.4: disable interactive window for service restart prompt (prevent "Restart services during package upgrades without asking?" dialog)
+echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-selections
 
 echo "press Enter to update resources file"
 read x
