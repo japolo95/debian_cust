@@ -19,7 +19,7 @@ yes 0000 | su -c "echo -e '\nalias python=\"python3\"' >> /home/user/.bash_profi
 yes 0000 | su -c "echo -e '\nalias python=\"python3\"' >> /home/user/.bashrc"
 
 #PART 0.2.1: create python3 symlink in /usr/bin/env (will be necessary for aws installation)
-sudo ln -s /usr/bin/python3 /usr/bin/env/python
+sudo ln -s /usr/bin/python3 /usr/bin/python
 
 #reload bash profile
 echo "reloading bash profile"
@@ -132,9 +132,13 @@ yes y | sudo apt install code # or code-insiders
 echo "press Enter to update gnome scaling settings"
 read x
 
+#PART 7: install pip
+#===================
+yes | sudo apt-get install python3-pip
+
 #PART 8: install curl
 #====================
-sudo apt-get install curl
+yes | sudo apt-get install curl
 
 #PART 9: install aws-cli
 #=======================
