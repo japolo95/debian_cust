@@ -33,7 +33,7 @@ read x
 
 echo "Updating resources"
 sudo sed -i '/cdrom/d' /etc/apt/sources.list
-yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bullseye main\ndeb-src http://deb.debian.org/debian/ bullseye main\n\ndeb http://security.debian.org/debian-security bullseye-security main contrib\ndeb-src http://security.debian.org/debian-security bullseye-security main contrib\n\ndeb http://deb.debian.org/debian/ bullseye-updates main contrib\ndeb-src http://deb.debian.org/debian/ bullseye-updates main contrib' > /etc/apt/sources.list"
+yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bookworm main\ndeb-src http://deb.debian.org/debian/ bookworm main\n\ndeb http://security.debian.org/debian-security bookworm-security main contrib\ndeb-src http://security.debian.org/debian-security bookworm-security main contrib\n\ndeb http://deb.debian.org/debian/ bookworm-updates main contrib\ndeb-src http://deb.debian.org/debian/ bookworm-updates main contrib' > /etc/apt/sources.list"
 
 echo "press Enter to update apt with new resources"
 read x
@@ -59,7 +59,7 @@ read x
 #=======================================================
 
 #PART 3.1 OPTION A: install xrdp using apt-get
-#don't use this for debian bullseye (11), as it does not work with gnome
+#don't use this for debian bookworm (12), as it does not work with gnome
 yes | sudo apt-get install xrdp
 
 #PART 3.1 OPTION B: install xrdp manually
