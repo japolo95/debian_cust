@@ -5,19 +5,28 @@
 echo "adding user to sudoers"
 yes 0000 | su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
+echo "press Enter to add sbin paths to environment"
+read x
+
 #PART 0.1: add sbin paths to environment
 echo "creating sbin paths"
-su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bash_profile #alternatively ~/.bash_profile"
-su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bashrc #alternatively ~/.bashrc"
+yes 0000 | su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bash_profile #alternatively ~/.bash_profile"
+yes 0000 | su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bashrc #alternatively ~/.bashrc"
 
 #reload bash profile
 echo "reloading bash profile"
 . /home/user/.bash_profile
 . /home/user/.bashrc
 
+echo "press Enter to rename computer"
+read x
+
 #PART 0.2: rename computer:
 echo "renaming computer"
 yes 0000 | su -c "echo 'workmachine' > /etc/hostname" #sudo would not work, the arrow symbol has privilegies of current shell, not sudo
+
+echo "press Enter to update resources file"
+read x
 
 #PART 1: remove cd from resrouces and add resources for apps installation
 #========================================================================
@@ -26,16 +35,25 @@ echo "Updating resources"
 sudo sed -i '/cdrom/d' /etc/apt/sources.list
 yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bullseye main\ndeb-src http://deb.debian.org/debian/ bullseye main\n\ndeb http://security.debian.org/debian-security bullseye-security main contrib\ndeb-src http://security.debian.org/debian-security bullseye-security main contrib\n\ndeb http://deb.debian.org/debian/ bullseye-updates main contrib\ndeb-src http://deb.debian.org/debian/ bullseye-updates main contrib' > /etc/apt/sources.list"
 
+echo "press Enter to update apt with new resources"
+read x
+
 #update apt so that updated file /etc/apt/sources.list takes effect for apt (i.e. apt must reload sources.list file)
 sudo apt update
 sudo apt-get update
+
+echo "press Enter to install gnome"
+read x
 
 echo "Installing software" #in interactive shell you need to use echo -e
 
 #PART 2: install gnome (disabled now)
 #=====================
 #sudo apt-get purge gnome-2048 aisleriot cheese gnome-chess gnome-contacts simple-scan evolution five-or-more four-in-a-row yelp hitori gnome-klotski libreoffice-common libreoffice-calc libreoffice-draw libreoffice-impress libreoffice-writer lightsoff gnome-mahjongg gnome-maps gnome-mines gnome-music gnome-nibbles malcontent seahorse quadrapassel iagno rhythmbox gnome-robots shotwell gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex transmission-gtk totem gnome-weather -y
-sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y --ignore-missing
+yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y --ignore-missing
+
+echo "press Enter to install xrdp"
+read x
 
 #PART 3: install RDP
 #=======================================================
@@ -63,13 +81,22 @@ yes | sudo apt-get install xrdp
 #install
 #cd ..
 
+echo "press Enter to activate xrdp"
+read x
+
 #PART 3.2 - RUN xrdp
 yes 0000 | sudo systemctl enable --now xrdp
 yes 0000 | sudo systemctl start xrdp
 
+echo "press Enter to install net-tools"
+read x
+
 #PART 4: install net-tools
 #=========================
 yes | sudo apt-get install net-tools
+
+echo "press Enter to prepare vscode installation"
+read x
 
 #PART 5: install vscode
 #======================
@@ -82,22 +109,28 @@ yes | sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/key
 yes | sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 sudo rm -f packages.microsoft.gpg
 
+echo "press Enter to install vscode"
+read x
+
 #PART 5.1.A.2 install vscode
 sudo apt install apt-transport-https
 sudo apt update
 sudo apt install code # or code-insiders
 
-#create desktop link
-ln -s /usr/share/code/code /home/user/Desktop/code
-
 #PART 5.1 OPTION B: install vscode usin snap, that's not recommended (see reddit - slow, takes lot of ram, etc...), so that vscode runs packaged in snap daemon
 #sudo apt install snapd - install snapd first, if not yet installed
 #sudo snap install --classic code # or code-insiders
+
+echo "press Enter to update gnome scaling settings"
+read x
 
 #PART 6: visual settings customization
 #=====================================
 #set font scaling factor from 1.0 to 1.1
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
+
+echo "press Enter to reboot"
+read x
 
 #PART END: delete this file from login folder and reboot
 #=======================================================
