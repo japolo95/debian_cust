@@ -1,17 +1,25 @@
 #!/bin/sh
 
-#PART 0: set current user to be superuser and add him to sudoers
+#PART 0: set current user to be superuser and add him to sudoers, create variables and aliases, name computer
 #su root -c "/sbin/usermod -aG sudo user" #not working
 echo "adding user to sudoers"
 yes 0000 | su -c "echo -e '\nuser ALL=(ALL:ALL) NOPASSWD:ALL' >> /etc/sudoers"
 
-echo "press Enter to add sbin paths to environment"
+echo "press Enter to add sbin paths to environment and to create aliases"
 read x
 
 #PART 0.1: add sbin paths to environment
 echo "creating sbin paths"
 yes 0000 | su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bash_profile #alternatively ~/.bash_profile"
 yes 0000 | su -c "echo -e '\nexport PATH=$PATH:/sbin' >> /home/user/.bashrc #alternatively ~/.bashrc"
+
+#PART 0.2: export python3 alias (will be useful in future to avoid always typing `python3`)
+echo "creating aliases"
+yes 0000 | su -c "echo -e '\nalias python=\"python3\"' >> /home/user/.bash_profile"
+yes 0000 | su -c "echo -e '\nalias python=\"python3\"' >> /home/user/.bashrc"
+
+#PART 0.2.1: create python3 symlink in /usr/bin/env (will be necessary for aws installation)
+sudo ln -s /usr/bin/python3 /usr/bin/env/python
 
 #reload bash profile
 echo "reloading bash profile"
@@ -123,6 +131,16 @@ yes y | sudo apt install code # or code-insiders
 
 echo "press Enter to update gnome scaling settings"
 read x
+
+#PART 8: install curl
+#====================
+sudo apt-get install curl
+
+#PART 9: install aws-cli
+#=======================
+sudo curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+sudo unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
 #PART 6: visual settings customization
 #=====================================
