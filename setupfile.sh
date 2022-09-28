@@ -63,7 +63,7 @@ yes | sudo apt-get install xrdp
 
 #PART 3.2 - RUN xrdp
 yes 0000 | sudo systemctl enable --now xrdp
-yes 0000 | systemctl start xrdp
+yes 0000 | sudo systemctl start xrdp
 
 #PART 4: install net-tools
 #=========================
