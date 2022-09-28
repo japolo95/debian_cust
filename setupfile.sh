@@ -26,10 +26,10 @@ echo "Updating resources"
 sudo sed -i '/cdrom/d' /etc/apt/sources.list
 yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bullseye main\ndeb-src http://deb.debian.org/debian/ bullseye main\n\ndeb http://security.debian.org/debian-security bullseye-security main contrib\ndeb-src http://security.debian.org/debian-security bullseye-security main contrib\n\ndeb http://deb.debian.org/debian/ bullseye-updates main contrib\ndeb-src http://deb.debian.org/debian/ bullseye-updates main contrib' > /etc/apt/sources.list"
 
-echo "Installing software" #in interactive shell you need to use echo -e
-
-#update apt
+#update apt so that updated file /etc/apt/sources.list takes effect for apt (i.e. apt must reload sources.list file)
 sudo apt update
+
+echo "Installing software" #in interactive shell you need to use echo -e
 
 #PART 2: install gnome (disabled now)
 #=====================
