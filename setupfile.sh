@@ -130,22 +130,31 @@ yes y | sudo apt install code # or code-insiders
 #sudo apt install snapd - install snapd first, if not yet installed
 #sudo snap install --classic code # or code-insiders
 
-echo "press Enter to update gnome scaling settings"
+echo "press Enter to install pip"
 read x
 
 #PART PIP: install pip
 #===================
 yes | sudo apt-get install python3-pip
 
+echo "press Enter to install curl"
+read x
+
 #PART CURL: install curl
 #====================
 yes | sudo apt-get install curl
 
+echo "press Enter to install aws-cli"
+read x
+
 #PART AWS: install aws-cli
 #=======================
-sudo curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-sudo unzip awscli-bundle.zip
-sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+yes | sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+yes | sudo unzip awscliv2.zip
+yes | sudo ./aws/install
+
+echo "press Enter to update gnome scaling settings"
+read x
 
 #PART VISUALSETTINGS: visual settings customization
 #=====================================
