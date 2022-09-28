@@ -129,6 +129,12 @@ read x
 #set font scaling factor from 1.0 to 1.1
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 
+#PART 7: add samba connection to favorites
+#=========================================
+echo "write name of your Windows computer and press Enter. This step adds gnome Nautilus bookmark, which links to your Windows computer via smb protocol"
+read COMPNAME
+sudo echo "smb://$COMPNAME/users/ users on $COMPNAME" > /home/user/.config/gtk-3.0/bookmarks
+
 echo "press Enter to reboot"
 read x
 
