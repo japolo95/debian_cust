@@ -48,7 +48,7 @@ echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-select
 
 echo "Updating resources"
 sudo sed -i '/cdrom/d' /etc/apt/sources.list
-yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bookworm main\ndeb-src http://deb.debian.org/debian/ bookworm main\n\ndeb http://security.debian.org/debian-security bookworm-security main contrib\ndeb-src http://security.debian.org/debian-security bookworm-security main contrib\n\ndeb http://deb.debian.org/debian/ bookworm-updates main contrib\ndeb-src http://deb.debian.org/debian/ bookworm-updates main contrib' > /etc/apt/sources.list"
+yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bookworm main contrib non-free\ndeb-src http://deb.debian.org/debian/ bookworm main contrib non-free\n\ndeb http://security.debian.org/debian-security bookworm-security main contrib non-free\ndeb-src http://security.debian.org/debian-security bookworm-security main contrib non-free\n\ndeb http://deb.debian.org/debian/ bookworm-updates main contrib non-free\ndeb-src http://deb.debian.org/debian/ bookworm-updates main contrib non-free' > /etc/apt/sources.list"
 
 #echo "press Enter to update apt with new resources"
 #read x
@@ -65,7 +65,7 @@ echo "Installing software" #in interactive shell you need to use echo -e
 #PART GNOME INSTALL
 #==================
 #sudo apt-get purge gnome-2048 aisleriot cheese gnome-chess gnome-contacts simple-scan evolution five-or-more four-in-a-row yelp hitori gnome-klotski libreoffice-common libreoffice-calc libreoffice-draw libreoffice-impress libreoffice-writer lightsoff gnome-mahjongg gnome-maps gnome-mines gnome-music gnome-nibbles malcontent seahorse quadrapassel iagno rhythmbox gnome-robots shotwell gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex transmission-gtk totem gnome-weather -y
-yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y --ignore-missing
+yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo firmware-sof-signed alsa-utils -y --ignore-missing
 
 #echo "press Enter to install xrdp"
 #read x
