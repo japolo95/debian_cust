@@ -100,8 +100,8 @@ yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gno
 #read x
 
 #PART 3.2 - RUN xrdp
-yes 0000 | sudo systemctl enable --now xrdp
-yes 0000 | sudo systemctl start xrdp
+#yes 0000 | sudo systemctl enable --now xrdp #TEMPORARY
+#yes 0000 | sudo systemctl start xrdp #TEMPORARY
 
 #echo "press Enter to install net-tools"
 #read x
