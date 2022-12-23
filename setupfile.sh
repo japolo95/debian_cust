@@ -75,7 +75,7 @@ yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gno
 
 #PART INSTALL RDP.1 OPTION A: install xrdp using apt-get
 #use this for debian bookworm (12)
-yes | sudo apt-get install xrdp
+#yes | sudo apt-get install xrdp #TEMPORARY
 
 #PART INSTALL RDP.1 OPTION B: install xrdp manually
 #an alternative way, custom version compiled
