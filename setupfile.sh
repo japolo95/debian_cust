@@ -48,7 +48,7 @@ echo '* libraries/restart-without-asking boolean true' | sudo debconf-set-select
 
 echo "Updating resources"
 sudo sed -i '/cdrom/d' /etc/apt/sources.list
-yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bookworm main contrib non-free\ndeb-src http://deb.debian.org/debian/ bookworm main contrib non-free\n\ndeb http://security.debian.org/debian-security bookworm-security main contrib non-free\ndeb-src http://security.debian.org/debian-security bookworm-security main contrib non-free\n\ndeb http://deb.debian.org/debian/ bookworm-updates main contrib non-free\ndeb-src http://deb.debian.org/debian/ bookworm-updates main contrib non-free' > /etc/apt/sources.list"
+yes 0000 | su -c "echo -e '\ndeb http://deb.debian.org/debian bookworm main\ndeb-src http://deb.debian.org/debian/ bookworm main\n\ndeb http://security.debian.org/debian-security bookworm-security main contrib\ndeb-src http://security.debian.org/debian-security bookworm-security main contrib\n\ndeb http://deb.debian.org/debian/ bookworm-updates main contrib\ndeb-src http://deb.debian.org/debian/ bookworm-updates main contrib' > /etc/apt/sources.list"
 
 #echo "press Enter to update apt with new resources"
 #read x
@@ -65,7 +65,7 @@ echo "Installing software" #in interactive shell you need to use echo -e
 #PART GNOME INSTALL
 #==================
 #sudo apt-get purge gnome-2048 aisleriot cheese gnome-chess gnome-contacts simple-scan evolution five-or-more four-in-a-row yelp hitori gnome-klotski libreoffice-common libreoffice-calc libreoffice-draw libreoffice-impress libreoffice-writer lightsoff gnome-mahjongg gnome-maps gnome-mines gnome-music gnome-nibbles malcontent seahorse quadrapassel iagno rhythmbox gnome-robots shotwell gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex transmission-gtk totem gnome-weather -y
-yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo firmware-sof-signed alsa-utils -y --ignore-missing
+yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gnome-characters gnome-clocks gnome-color-manager gnome-disk-utility evince gnome-shell-extension-prefs nautilus firefox-esr gnome-font-viewer eog im-config gnome-logs gnome-screenshot gnome-system-monitor gnome-terminal gedit gnome-todo -y --ignore-missing
 
 #echo "press Enter to install xrdp"
 #read x
@@ -75,7 +75,7 @@ yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gno
 
 #PART INSTALL RDP.1 OPTION A: install xrdp using apt-get
 #use this for debian bookworm (12)
-#yes | sudo apt-get install xrdp #TEMPORARY
+yes | sudo apt-get install xrdp
 
 #PART INSTALL RDP.1 OPTION B: install xrdp manually
 #an alternative way, custom version compiled
@@ -100,8 +100,8 @@ yes | sudo apt-get install gnome-core network-manager-gnome gnome-calculator gno
 #read x
 
 #PART 3.2 - RUN xrdp
-#yes 0000 | sudo systemctl enable --now xrdp #TEMPORARY
-#yes 0000 | sudo systemctl start xrdp #TEMPORARY
+yes 0000 | sudo systemctl enable --now xrdp
+yes 0000 | sudo systemctl start xrdp
 
 #echo "press Enter to install net-tools"
 #read x
@@ -167,11 +167,11 @@ yes | sudo ./aws/install
 #set font scaling factor from 1.0 to 1.1
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.2
 
-#PART SAMBA_BOOKMARK: add samba connection to favorites
+#PART SAMBA_BOOKMARK: add samba connection to favorites #this is disabled as better access to files is via xrdp
 #=========================================
-echo "write name of your Windows computer and press Enter. This step adds gnome Nautilus bookmark, which links to your Windows computer via smb protocol"
-read COMPNAME
-sudo echo "smb://$COMPNAME/users/ users on $COMPNAME" > /home/user/.config/gtk-3.0/bookmarks
+#echo "write name of your Windows computer and press Enter. This step adds gnome Nautilus bookmark, which links to your Windows computer via smb protocol"
+#read COMPNAME
+#sudo echo "smb://$COMPNAME/users/ users on $COMPNAME" > /home/user/.config/gtk-3.0/bookmarks
 
 #echo "press Enter to reboot"
 #read x
